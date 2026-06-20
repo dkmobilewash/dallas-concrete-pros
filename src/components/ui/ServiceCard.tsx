@@ -7,6 +7,9 @@ import {
   Layers,
   Palette,
   Warehouse,
+  Grid3x3,
+  Waves,
+  Wrench,
   ArrowRight,
   type LucideIcon,
 } from 'lucide-react'
@@ -20,6 +23,9 @@ const iconMap: Record<string, LucideIcon> = {
   Layers,
   Palette,
   Warehouse,
+  Grid3x3,
+  Waves,
+  Wrench,
 }
 
 export default function ServiceCard({ service }: { service: Service }) {

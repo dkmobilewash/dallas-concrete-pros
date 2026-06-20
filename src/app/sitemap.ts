@@ -19,6 +19,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
+  const comboUrls: MetadataRoute.Sitemap = []
+  for (const service of services) {
+    for (const city of cities) {
+      comboUrls.push({
+        url: `${site.baseUrl}/services/${service.slug}/${city.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      })
+    }
+  }
+
   const blogUrls = getAllPosts().map((post) => ({
     url: `${site.baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
@@ -33,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.baseUrl}/blog`, priority: 0.5, changeFrequency: 'weekly' },
     ...serviceUrls,
     ...cityUrls,
+    ...comboUrls,
     ...blogUrls,
   ]
 }

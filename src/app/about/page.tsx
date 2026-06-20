@@ -49,6 +49,27 @@ export default function AboutPage() {
             honest timelines, quality materials, and clean, durable finished
             surfaces that hold up to the demands of the North Texas climate.
           </p>
+          <p>
+            All of our work complies with{' '}
+            <a
+              href="https://dallascityhall.com/departments/sustainabledevelopment/buildinginspection/Pages/default.aspx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-orange hover:underline"
+            >
+              City of Dallas building codes and permits
+            </a>
+            , and our contractors are registered with the{' '}
+            <a
+              href="https://www.tdlr.texas.gov/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-orange hover:underline"
+            >
+              Texas Department of Licensing and Regulation
+            </a>
+            .
+          </p>
         </div>
       </section>
 

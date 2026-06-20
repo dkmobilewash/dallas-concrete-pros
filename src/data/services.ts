@@ -102,4 +102,43 @@ export const services: Service[] = [
     icon: 'Warehouse',
     relatedSlugs: ['concrete-foundations', 'concrete-driveways', 'retaining-walls'],
   },
+  {
+    slug: 'concrete-flooring',
+    name: 'Concrete Flooring',
+    shortName: 'Flooring',
+    headline: 'Concrete Flooring in Dallas, TX',
+    metaTitle: 'Concrete Flooring Contractors Dallas TX',
+    metaDescription:
+      'Professional concrete flooring installation, polishing, and coating for homes and businesses in Dallas, TX — call 214-466-2536.',
+    heroSubhead:
+      'Durable, low-maintenance concrete floors for garages, warehouses, retail spaces, and modern homes.',
+    icon: 'Grid3x3',
+    relatedSlugs: ['commercial-concrete', 'stamped-concrete', 'concrete-repair-resurfacing'],
+  },
+  {
+    slug: 'concrete-pool-decks',
+    name: 'Concrete Pool Decks',
+    shortName: 'Pool Decks',
+    headline: 'Concrete Pool Decks in Dallas, TX',
+    metaTitle: 'Concrete Pool Deck Contractors Dallas TX',
+    metaDescription:
+      'Slip-resistant concrete pool deck installation and resurfacing in Dallas, TX — call 214-466-2536 for a free estimate.',
+    heroSubhead:
+      'Cool, slip-resistant concrete pool decks designed for safety, style, and the Dallas summer heat.',
+    icon: 'Waves',
+    relatedSlugs: ['stamped-concrete', 'concrete-patios', 'concrete-repair-resurfacing'],
+  },
+  {
+    slug: 'concrete-repair-resurfacing',
+    name: 'Concrete Repair & Resurfacing',
+    shortName: 'Repair',
+    headline: 'Concrete Repair & Resurfacing in Dallas, TX',
+    metaTitle: 'Concrete Repair & Resurfacing Dallas TX',
+    metaDescription:
+      'Concrete repair, leveling, and resurfacing services in Dallas, TX — restore cracked or damaged surfaces — call 214-466-2536.',
+    heroSubhead:
+      'Restore cracked, spalling, or uneven concrete with professional repair and resurfacing solutions.',
+    icon: 'Wrench',
+    relatedSlugs: ['concrete-driveways', 'concrete-patios', 'concrete-flooring'],
+  },
 ]

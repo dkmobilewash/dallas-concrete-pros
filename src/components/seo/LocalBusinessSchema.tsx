@@ -3,7 +3,7 @@ import { cities } from '@/data/cities'
 import { services } from '@/data/services'
 
 export default function LocalBusinessSchema({ cityName }: { cityName?: string }) {
-  const schema = {
+  const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     '@id': `${site.baseUrl}/#business`,
@@ -11,11 +11,19 @@ export default function LocalBusinessSchema({ cityName }: { cityName?: string })
     telephone: site.phone,
     email: site.email,
     url: site.baseUrl,
+    priceRange: '$$',
     address: {
       '@type': 'PostalAddress',
+      streetAddress: site.address.street,
       addressLocality: cityName ?? site.address.city,
       addressRegion: site.address.stateCode,
+      postalCode: site.address.zip,
       addressCountry: 'US',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: site.geo.lat,
+      longitude: site.geo.lng,
     },
     areaServed: cities.map((c) => ({
       '@type': 'City',
@@ -41,6 +49,10 @@ export default function LocalBusinessSchema({ cityName }: { cityName?: string })
         },
       })),
     },
+  }
+
+  if (site.sameAs.length > 0) {
+    schema.sameAs = site.sameAs
   }
 
   return (

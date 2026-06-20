@@ -4,6 +4,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import { getAllPosts, getPostBySlug } from '@/lib/blog'
 import { site } from '@/data/site'
 import { buildMetadata } from '@/lib/metadata'
+import BlogPostSchema from '@/components/seo/BlogPostSchema'
 
 export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }))
@@ -25,6 +26,12 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
   return (
     <>
+      <BlogPostSchema
+        title={post.title}
+        description={post.description}
+        date={post.date}
+        slug={post.slug}
+      />
       <section className="bg-brand-gray-light py-12">
         <div className="max-w-3xl mx-auto px-4">
           <time className="text-sm text-brand-gray">{post.date}</time>

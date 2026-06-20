@@ -9,6 +9,9 @@ import {
   Layers,
   Palette,
   Warehouse,
+  Grid3x3,
+  Waves,
+  Wrench,
   CheckCircle,
   type LucideIcon,
 } from 'lucide-react'
@@ -22,7 +25,7 @@ import Button from '@/components/ui/Button'
 import ServiceSchema from '@/components/seo/ServiceSchema'
 
 const iconMap: Record<string, LucideIcon> = {
-  Car, Sofa, Footprints, Building2, Layers, Palette, Warehouse,
+  Car, Sofa, Footprints, Building2, Layers, Palette, Warehouse, Grid3x3, Waves, Wrench,
 }
 
 const serviceContent: Record<
@@ -84,8 +87,8 @@ const serviceContent: Record<
   },
   'concrete-walkways': {
     overview: [
-      'Concrete walkways provide safe, durable paths connecting your driveway, front door, patio, and other areas of your property. A well-designed walkway eliminates trip hazards, improves accessibility, and adds a clean, finished look to your landscape.',
-      'Dallas Concrete Pros installs walkways with slip-resistant finishes, ADA-compliant dimensions where needed, and proper grading to prevent water pooling. We handle everything from simple front entry walks to winding garden paths and side-yard connections.',
+      'Concrete walkways and sidewalks provide safe, durable paths connecting your driveway, front door, patio, and other areas of your property. A well-designed walkway eliminates trip hazards, improves accessibility, and adds a clean, finished look to your landscape. Whether you need a concrete sidewalk along your property frontage or a private walkway through your yard, the right concrete surface makes a difference.',
+      'Dallas Concrete Pros installs concrete walkways and sidewalks with slip-resistant finishes, ADA-compliant dimensions where needed, and proper grading to prevent water pooling. We handle everything from simple front entry walks and public-facing concrete sidewalks to winding garden paths and side-yard connections throughout Dallas.',
     ],
     benefits: [
       { title: 'ADA-Compliant Options', desc: 'Walkways built to accessibility standards with proper width, slope, and non-slip surfaces.' },
@@ -175,6 +178,78 @@ const serviceContent: Record<
       { question: 'Is stamped concrete slippery?', answer: 'The texture from the stamp pattern provides traction, and we can add a non-slip additive to the sealer for pool decks and wet areas.' },
       { question: 'Can you stamp an existing concrete surface?', answer: 'Stamping must be done on fresh concrete. For existing surfaces, we offer concrete overlay options that can be stamped or textured.' },
       { question: 'What is the most popular stamped concrete pattern?', answer: 'Ashlar slate and flagstone patterns are the most popular in the Dallas area. We bring samples so you can see how each pattern looks with different colors.' },
+    ],
+  },
+  'concrete-flooring': {
+    overview: [
+      'Concrete flooring delivers a sleek, modern surface that stands up to heavy foot traffic, machinery, and chemical exposure. Whether you need a polished showroom floor, a coated garage slab, or a warehouse surface that can handle forklift traffic, concrete flooring is the most durable and low-maintenance option available.',
+      'Dallas Concrete Pros installs, polishes, and coats concrete floors for residential garages, commercial retail spaces, restaurants, warehouses, and industrial facilities throughout Dallas. We offer polished concrete, epoxy coatings, stained concrete, and densifier treatments that transform ordinary slabs into high-performance surfaces.',
+    ],
+    benefits: [
+      { title: 'Extreme Durability', desc: 'Concrete floors resist scratches, impacts, and heavy loads that would damage tile, wood, or vinyl.' },
+      { title: 'Low Maintenance', desc: 'No waxing, no grout to clean — just sweep and mop for a surface that stays looking clean.' },
+      { title: 'Chemical Resistant Coatings', desc: 'Epoxy and polyaspartic coatings resist oil, grease, and chemical spills common in garages and shops.' },
+      { title: 'Custom Appearance', desc: 'Polished concrete, acid stains, metallic epoxy, and color flake systems offer a wide range of looks.' },
+    ],
+    process: [
+      { step: 'Surface Assessment', desc: 'We evaluate your existing slab for cracks, moisture levels, and surface condition to determine the best treatment.' },
+      { step: 'Grinding & Preparation', desc: 'Diamond grinders remove old coatings and open the concrete pores for proper adhesion of new finishes.' },
+      { step: 'Application', desc: 'Your chosen system — polish, epoxy, stain, or coating — is applied in layers with proper cure time between coats.' },
+      { step: 'Final Seal', desc: 'A topcoat sealer is applied for additional protection, gloss control, and long-term performance.' },
+    ],
+    faqs: [
+      { question: 'How long does it take to install a concrete floor coating?', answer: 'Most residential garage floors take 2–3 days including prep, application, and cure time. Commercial projects vary based on square footage.' },
+      { question: 'Can you polish an existing concrete slab?', answer: 'Yes, most existing slabs can be polished. We grind the surface in progressive steps to achieve the level of sheen you want, from matte to high-gloss.' },
+      { question: 'Is epoxy flooring slippery?', answer: 'Standard epoxy can be slippery when wet. We add anti-slip additives to the topcoat for garages, commercial kitchens, and other areas where traction matters.' },
+      { question: 'How long do concrete floor coatings last?', answer: 'Quality epoxy and polyaspartic coatings last 10–20 years with normal use. Polished concrete is virtually permanent and only needs periodic re-densification.' },
+    ],
+  },
+  'concrete-pool-decks': {
+    overview: [
+      'A concrete pool deck needs to balance safety, comfort, and style. The surface must be slip-resistant when wet, cool enough to walk on barefoot in the Dallas summer heat, and attractive enough to complement your outdoor living space. Concrete delivers all three when properly installed and finished.',
+      'Dallas Concrete Pros builds and resurfaces concrete pool decks with cool-deck finishes, stamped patterns, and textured coatings designed specifically for pool environments. We handle new pool deck construction, expansions, and resurfacing of worn or damaged existing decks throughout the Dallas area.',
+    ],
+    benefits: [
+      { title: 'Slip-Resistant Surfaces', desc: 'Textured finishes and non-slip additives that provide traction on wet surfaces around the pool.' },
+      { title: 'Cool-Deck Technology', desc: 'Light-colored coatings and textures that stay cooler underfoot than standard concrete in direct sun.' },
+      { title: 'Seamless Coping Integration', desc: 'Clean transitions between the pool coping and deck surface for a polished, professional look.' },
+      { title: 'Resurfacing Options', desc: 'Overlay and resurfacing systems that renew worn pool decks without full demolition.' },
+    ],
+    process: [
+      { step: 'Design & Layout', desc: 'We plan the deck shape, drainage slope, and finish around your pool equipment, landscaping, and outdoor living areas.' },
+      { step: 'Base Preparation', desc: 'The area is excavated, compacted, and formed with proper slope away from the pool and toward drainage points.' },
+      { step: 'Pour & Finish', desc: 'Concrete is poured and finished with your chosen texture — broom finish, stamped pattern, or spray-texture cool deck.' },
+      { step: 'Seal & Protect', desc: 'A UV-stable sealer is applied to protect the surface from sun, chlorine splash, and pool chemicals.' },
+    ],
+    faqs: [
+      { question: 'What is the best concrete finish for a pool deck?', answer: 'Spray-texture cool deck and stamped concrete are the most popular options in Dallas. Both provide slip resistance and stay cooler than smooth concrete in direct sun.' },
+      { question: 'Can you resurface my existing pool deck?', answer: 'Yes, concrete overlays can be applied over existing pool decks to restore appearance and improve safety without tearing out the old surface.' },
+      { question: 'How do you handle drainage around the pool?', answer: 'We grade the deck to slope away from the pool and toward landscape drains or yard areas. Proper drainage prevents standing water and keeps the surface safe.' },
+      { question: 'How long does a pool deck installation take?', answer: 'A new pool deck typically takes 3–5 days depending on size and finish. Resurfacing projects are usually completed in 2–3 days.' },
+    ],
+  },
+  'concrete-repair-resurfacing': {
+    overview: [
+      'Cracked, spalling, or uneven concrete does not always need full replacement. Professional repair and resurfacing can restore structural integrity and appearance at a fraction of the cost of a full tear-out and repour. The right approach depends on the type and extent of the damage.',
+      'Dallas Concrete Pros provides concrete repair and resurfacing services for driveways, patios, sidewalks, garage floors, and commercial surfaces throughout Dallas. We handle crack filling, slab leveling, spall repair, and full-surface overlays that bring damaged concrete back to service.',
+    ],
+    benefits: [
+      { title: 'Cost-Effective Restoration', desc: 'Repair and resurfacing costs 40–60% less than full removal and replacement.' },
+      { title: 'Slab Leveling', desc: 'Polyurethane foam injection raises and levels sunken slabs without excavation.' },
+      { title: 'Overlay Systems', desc: 'Thin concrete overlays cover surface damage and provide a fresh, new finish over existing slabs.' },
+      { title: 'Extended Surface Life', desc: 'Proper repairs prevent damage from spreading, adding years of life to your existing concrete.' },
+    ],
+    process: [
+      { step: 'Damage Assessment', desc: 'We inspect the surface to determine the type, cause, and extent of damage and recommend the right repair method.' },
+      { step: 'Surface Preparation', desc: 'Damaged areas are cleaned, loose material is removed, and the surface is prepped for bonding.' },
+      { step: 'Repair Application', desc: 'Cracks are filled, spalls are patched, or overlay material is applied depending on the repair scope.' },
+      { step: 'Finish & Seal', desc: 'The repaired surface is finished to match the surrounding concrete and sealed for protection.' },
+    ],
+    faqs: [
+      { question: 'When should I repair vs. replace my concrete?', answer: 'If damage is limited to the surface — hairline cracks, minor spalling, discoloration — repair is usually the right call. If the slab is severely cracked through, heaving, or structurally compromised, replacement is more cost-effective long term.' },
+      { question: 'Can you fix a sunken concrete slab?', answer: 'Yes, we use polyurethane foam injection to lift and level sunken slabs. This is faster, cleaner, and less expensive than mud-jacking or replacement.' },
+      { question: 'How long do concrete repairs last?', answer: 'Quality repairs using proper bonding agents and materials last 8–15 years or more, depending on the type of repair and traffic on the surface.' },
+      { question: 'Can you make repaired concrete match the existing surface?', answer: 'We match the color and texture as closely as possible. For large visible areas, a full overlay provides the most uniform appearance.' },
     ],
   },
   'commercial-concrete': {
