@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import {
   Car,
@@ -19,6 +20,7 @@ import { services } from '@/data/services'
 import { cities } from '@/data/cities'
 import { site } from '@/data/site'
 import { buildMetadata } from '@/lib/metadata'
+import { getImagesByCategory } from '@/data/images'
 import BreadcrumbNav from '@/components/ui/BreadcrumbNav'
 import FaqAccordion from '@/components/ui/FaqAccordion'
 import Button from '@/components/ui/Button'
@@ -26,6 +28,19 @@ import ServiceSchema from '@/components/seo/ServiceSchema'
 
 const iconMap: Record<string, LucideIcon> = {
   Car, Sofa, Footprints, Building2, Layers, Palette, Warehouse, Grid3x3, Waves, Wrench,
+}
+
+const serviceImageCategory: Record<string, 'driveway' | 'patio' | 'walkway' | 'foundation' | 'commercial' | 'flooring' | 'crew'> = {
+  'concrete-driveways': 'driveway',
+  'concrete-patios': 'patio',
+  'concrete-walkways': 'walkway',
+  'concrete-foundations': 'foundation',
+  'retaining-walls': 'foundation',
+  'stamped-concrete': 'patio',
+  'commercial-concrete': 'commercial',
+  'concrete-flooring': 'flooring',
+  'concrete-pool-decks': 'patio',
+  'concrete-repair-resurfacing': 'driveway',
 }
 
 const serviceContent: Record<
@@ -302,6 +317,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   const related = services.filter((s) => service.relatedSlugs.includes(s.slug))
   const Icon = iconMap[service.icon] ?? Building2
   const topCities = cities.slice(0, 5)
+  const category = serviceImageCategory[service.slug]
+  const images = category ? getImagesByCategory(category) : []
+  const heroImg = images[0]
 
   return (
     <>
@@ -325,6 +343,21 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <p className="text-lg text-brand-gray">{service.heroSubhead}</p>
         </div>
       </section>
+
+      {heroImg && (
+        <section className="py-0">
+          <div className="max-w-4xl mx-auto px-4 -mt-2">
+            <Image
+              src={heroImg.src}
+              alt={heroImg.alt}
+              width={900}
+              height={500}
+              className="w-full h-64 md:h-80 object-cover rounded-lg shadow-md"
+              sizes="(max-width: 768px) 100vw, 900px"
+            />
+          </div>
+        </section>
+      )}
 
       <section className="py-12">
         <div className="max-w-4xl mx-auto px-4">

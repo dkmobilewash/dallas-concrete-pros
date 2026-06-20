@@ -6,7 +6,9 @@ import ServiceAreasSection from '@/components/sections/ServiceAreasSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import FaqSection from '@/components/sections/FaqSection'
 import CtaSection from '@/components/sections/CtaSection'
+import ProjectGallery from '@/components/sections/ProjectGallery'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
+import { ogImage } from '@/data/images'
 
 export const metadata: Metadata = {
   title: {
@@ -23,6 +25,7 @@ export const metadata: Metadata = {
     siteName: 'Dallas Concrete Pros',
     locale: 'en_US',
     type: 'website',
+    images: [{ url: `https://dallasconcretepros.net${ogImage}`, width: 1200, height: 630 }],
   },
 }
 
@@ -32,6 +35,7 @@ export default function HomePage() {
       <LocalBusinessSchema />
       <HeroSection />
       <ServicesGrid />
+      <ProjectGallery />
       <WhyChooseUs />
       <ServiceAreasSection />
       <TestimonialsSection />

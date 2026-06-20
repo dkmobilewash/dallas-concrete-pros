@@ -1,10 +1,20 @@
+import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import { site } from '@/data/site'
+import { heroImage } from '@/data/images'
 
 export default function HeroSection() {
   return (
-    <section className="bg-brand-charcoal text-white py-20 md:py-28">
-      <div className="max-w-6xl mx-auto px-4 text-center">
+    <section className="relative bg-brand-charcoal text-white py-20 md:py-28 overflow-hidden">
+      <Image
+        src={heroImage.src}
+        alt={heroImage.alt}
+        fill
+        className="object-cover opacity-30"
+        priority
+        sizes="100vw"
+      />
+      <div className="relative max-w-6xl mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6">
           Dallas Concrete Contractors
         </h1>

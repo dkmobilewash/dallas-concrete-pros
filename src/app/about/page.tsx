@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { buildMetadata } from '@/lib/metadata'
 import { site } from '@/data/site'
+import { getImagesByCategory } from '@/data/images'
 import Button from '@/components/ui/Button'
 import { Shield, Users, Award } from 'lucide-react'
 
@@ -12,6 +14,8 @@ export const metadata: Metadata = buildMetadata({
 })
 
 export default function AboutPage() {
+  const crewImages = getImagesByCategory('crew')
+
   return (
     <>
       <section className="bg-brand-gray-light py-12">
@@ -25,6 +29,26 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
+
+      {crewImages.length > 0 && (
+        <section className="py-0">
+          <div className="max-w-4xl mx-auto px-4 -mt-2">
+            <div className="grid grid-cols-2 gap-4">
+              {crewImages.slice(0, 2).map((img) => (
+                <Image
+                  key={img.src}
+                  src={img.src}
+                  alt={img.alt}
+                  width={450}
+                  height={300}
+                  className="w-full h-48 md:h-64 object-cover rounded-lg shadow-md"
+                  sizes="(max-width: 768px) 50vw, 450px"
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="py-12">
         <div className="max-w-4xl mx-auto px-4 space-y-6 text-brand-gray leading-relaxed">
