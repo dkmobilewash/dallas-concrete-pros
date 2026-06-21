@@ -1,0 +1,32 @@
+IMAGE RENAME GUIDE — Dallas Concrete Pros
+==========================================
+
+Rename your photos to match these filenames exactly (including .jpg extension),
+then upload all 19 to GitHub at: public/images/
+
+BATCH 1 (first 5 photos you sent):
+1. hero-driveway-pour.jpg          → Fresh driveway with wood forms, residential
+2. crew-sealing-concrete.jpg       → Guy in green shirt with sprayer sealing slab
+3. foundation-rebar.jpg            → Rebar grid in excavated foundation
+4. commercial-interior-pour.jpg    → Crew in yellow shirts pouring interior floor
+5. driveway-walkway-finished.jpg   → Finished driveway + walkway with red mulch
+
+BATCH 2 (second 5 photos):
+6. commercial-sidewalk-pour.jpg    → Two workers finishing commercial slab with forms
+7. concrete-truck-pour.jpg         → Worker spreading concrete from mixer truck chute
+8. commercial-slab-large.jpg       → Wide shot, large crew with pump truck, commercial
+9. pump-truck-rebar.jpg            → Pump boom arm over rebar grid, commercial site
+10. walkway-broom-finish.jpg       → Long broom-finish walkway along dark building
+
+BATCH 3 (third 5 photos):
+11. driveway-residential-cones.jpg → Fresh driveway with orange safety cones, two-car garage
+12. driveway-large-pour.jpg        → Crew bull-floating big driveway, plastic on brick house
+13. driveway-curved-dusk.jpg       → Crew pouring curved driveway at brick home, dusk sky
+14. walkway-steps-new.jpg          → Walkway + concrete steps at green new-build home
+15. patio-slab-finishing.jpg       → Close-up bull float on fresh slab, brick wall behind
+
+BATCH 4 (last 4 photos):
+16. floor-polished-commercial.jpg  → Smooth polished floor with steel columns
+17. driveway-long-residential.jpg  → Long straight driveway, summer, green trees
+18. driveway-control-joints.jpg    → Driveway with control joints, brick home, fall leaves
+19. concrete-steps-closeup.jpg     → Close-up of three broom-finish concrete steps
