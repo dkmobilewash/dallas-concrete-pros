@@ -3,17 +3,11 @@
 // as a plain-text list to signal broader geographic coverage across the metroplex.
 // Edit freely — add or remove towns to match the areas actually served.
 export const additionalServiceAreas: string[] = [
-  'Richardson',
-  'Garland',
-  'Irving',
-  'Carrollton',
   'Addison',
   'Farmers Branch',
   'The Colony',
   'Little Elm',
-  'Lewisville',
   'Coppell',
-  'Grapevine',
   'Wylie',
   'Sachse',
   'Murphy',
@@ -28,4 +22,9 @@ export const additionalServiceAreas: string[] = [
   'Highland Park',
   'University Park',
   'Denton',
+  'Grand Prairie',
+  'Duncanville',
+  'DeSoto',
+  'Cedar Hill',
+  'Balch Springs',
 ]

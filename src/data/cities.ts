@@ -152,4 +152,88 @@ export const cities: City[] = [
     intro:
       'Rockwall sits on the western shore of Lake Ray Hubbard and is the county seat of the smallest county in Texas. From lakefront properties in Heath to family homes near Historic Rockwall Square, our concrete team serves this tight-knit community with driveways, patios, walkways, and foundation work built to withstand the moisture fluctuations that come with lakeside living.',
   },
+  {
+    slug: 'richardson',
+    name: 'Richardson',
+    county: 'Dallas & Collin Counties',
+    metaTitle: 'Concrete Contractor Richardson TX',
+    metaDescription:
+      'Professional concrete contractor in Richardson, TX for driveways, patios, and foundations — call 214-466-2536 for a free estimate.',
+    headline: 'Concrete Contractor in Richardson, TX',
+    subhead: 'Dependable concrete work for Richardson homes and the Telecom Corridor.',
+    landmarks: ['CityLine', 'UT Dallas', 'Eisemann Center', 'Telecom Corridor'],
+    neighborhoods: ['Canyon Creek', 'Prairie Creek', 'Richardson Heights', 'Cottonwood Heights', 'Reservation'],
+    intro:
+      'Richardson blends the corporate energy of the Telecom Corridor and CityLine with established residential neighborhoods and the UT Dallas campus. From driveway replacements in Canyon Creek to patios and foundation work near Prairie Creek, our crews deliver concrete built for the expansive clay soils and seasonal swings that define this part of North Texas.',
+  },
+  {
+    slug: 'garland',
+    name: 'Garland',
+    county: 'Dallas County',
+    metaTitle: 'Concrete Contractor Garland TX',
+    metaDescription:
+      'Reliable concrete contractor in Garland, TX for driveways, patios, walkways, and foundations — call 214-466-2536.',
+    headline: 'Concrete Contractor in Garland, TX',
+    subhead: 'Quality concrete services for Garland homeowners and businesses.',
+    landmarks: ['Firewheel Town Center', 'Lake Ray Hubbard', 'Granville Arts Center', 'Historic Downtown Garland Square'],
+    neighborhoods: ['Firewheel', 'Duck Creek', 'Club Hill', 'Camelot', 'Oakridge'],
+    intro:
+      'Garland is one of the largest cities in the Dallas area, stretching from the shores of Lake Ray Hubbard to the shops at Firewheel and the historic downtown square. Our concrete team serves Garland neighborhoods like Firewheel and Duck Creek with driveways, patios, and foundation work engineered to hold up to the expansive soils and heat common across Dallas County.',
+  },
+  {
+    slug: 'irving',
+    name: 'Irving',
+    county: 'Dallas County',
+    metaTitle: 'Concrete Contractor Irving TX',
+    metaDescription:
+      'Professional concrete contractor in Irving, TX including Las Colinas — driveways, patios, and commercial concrete — call 214-466-2536.',
+    headline: 'Concrete Contractor in Irving, TX',
+    subhead: 'Residential and commercial concrete for Irving and Las Colinas.',
+    landmarks: ['Las Colinas', 'Toyota Music Factory', 'Mustangs of Las Colinas', 'Mandalay Canal'],
+    neighborhoods: ['Las Colinas', 'Valley Ranch', 'Hackberry Creek', 'Plymouth Park', 'University Hills'],
+    intro:
+      'Irving sits at the center of the metroplex, home to the Las Colinas business district, Valley Ranch, and the Toyota Music Factory. From residential driveways and patios in Hackberry Creek to commercial flatwork in the Las Colinas corridor, our crews deliver durable concrete work suited to Irving’s mix of established homes and business properties.',
+  },
+  {
+    slug: 'carrollton',
+    name: 'Carrollton',
+    county: 'Dallas & Denton Counties',
+    metaTitle: 'Concrete Contractor Carrollton TX',
+    metaDescription:
+      'Trusted concrete contractor in Carrollton, TX for driveways, patios, walkways, and foundations — call 214-466-2536.',
+    headline: 'Concrete Contractor in Carrollton, TX',
+    subhead: 'Concrete driveways, patios, and more for Carrollton homeowners.',
+    landmarks: ['Historic Downtown Carrollton Square', 'Elm Fork Nature Preserve', 'A.W. Perry Homestead', 'Coyote Drive-In'],
+    neighborhoods: ['Josey Ranch', 'Country Place', 'Rosemeade', 'Huntington Ridge', 'Fair Oaks'],
+    intro:
+      'Carrollton spans the Dallas–Denton county line, combining the charm of its Historic Downtown Square with established neighborhoods like Josey Ranch and Rosemeade. Our concrete crews serve Carrollton homeowners with driveway replacements, patio builds, and foundation work designed to perform in the clay-heavy soils found throughout the northwest metroplex.',
+  },
+  {
+    slug: 'lewisville',
+    name: 'Lewisville',
+    county: 'Denton County',
+    metaTitle: 'Concrete Contractor Lewisville TX',
+    metaDescription:
+      'Professional concrete contractor in Lewisville, TX for driveways, patios, and foundations — call 214-466-2536 for a free estimate.',
+    headline: 'Concrete Contractor in Lewisville, TX',
+    subhead: 'Reliable concrete work for Lewisville families and lakeside properties.',
+    landmarks: ['Lake Lewisville', 'Old Town Lewisville', 'MCL Grand Theater', 'LLELA Nature Preserve'],
+    neighborhoods: ['Castle Hills', 'Valley Vista', 'Timbercreek', 'Highland', 'Garden Ridge'],
+    intro:
+      'Lewisville stretches along the southern shore of Lake Lewisville and has grown quickly around Old Town and the master-planned community of Castle Hills. From new driveways in Castle Hills to patios and foundation work near the lake, our crews build concrete surfaces that stand up to the moisture swings and Denton County soils common in this fast-growing city.',
+  },
+  {
+    slug: 'grapevine',
+    name: 'Grapevine',
+    county: 'Tarrant County',
+    metaTitle: 'Concrete Contractor Grapevine TX',
+    metaDescription:
+      'Concrete contractor in Grapevine, TX for driveways, patios, and decorative concrete — call 214-466-2536 for a free estimate.',
+    headline: 'Concrete Contractor in Grapevine, TX',
+    subhead: 'Quality concrete craftsmanship for Grapevine homes and businesses.',
+    landmarks: ['Historic Main Street', 'Lake Grapevine', 'Gaylord Texan', 'Grapevine Mills'],
+    neighborhoods: ['Silverlake', 'The Vineyards', 'Winding Creek', 'Dove Creek', 'Placid Peak'],
+    intro:
+      'Grapevine is known for its Historic Main Street, the shores of Lake Grapevine, and destinations like the Gaylord Texan and Grapevine Mills. Our concrete team serves Grapevine homeowners in neighborhoods like Silverlake and The Vineyards with driveways, patios, and decorative concrete built to handle the Tarrant County climate and complement the character of this well-kept city.',
+  },
 ]
