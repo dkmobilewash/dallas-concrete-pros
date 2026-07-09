@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Phone, Mail, Clock } from 'lucide-react'
+import { Phone, Mail, Clock, ShieldCheck } from 'lucide-react'
 import { site } from '@/data/site'
 import { services } from '@/data/services'
 import { cities } from '@/data/cities'
@@ -83,7 +83,11 @@ export default function Footer() {
       <div className="border-t border-gray-700">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400 gap-2">
           <p>&copy; {new Date().getFullYear()} {site.name}. All rights reserved.</p>
-          <p>Licensed &amp; Insured Concrete Contractor in Dallas, TX</p>
+          <p className="flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-brand-orange shrink-0" />
+            Licensed &amp; Insured Concrete Contractor in Dallas, TX
+            {site.license.number ? ` — License #${site.license.number}` : ''}
+          </p>
         </div>
       </div>
     </footer>

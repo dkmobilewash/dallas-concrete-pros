@@ -21,8 +21,8 @@ export default function HeroSection() {
         <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10">
           Professional concrete driveways, patios, foundations, and more
           throughout Dallas and the surrounding areas. Residential and
-          commercial concrete contractors in Dallas you can trust for quality
-          workmanship on every pour.
+          commercial concrete contractors in Dallas, TX you can trust for
+          quality workmanship on every pour.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button href="/contact">Get Free Estimate</Button>

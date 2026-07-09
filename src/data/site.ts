@@ -18,7 +18,13 @@ export const site = {
     weekdays: 'Monday–Saturday: 8:00 AM – 6:00 PM',
     weekend: 'Sunday: Closed',
   },
-  baseUrl: 'https://dallasconcretepros.net',
+  baseUrl: 'https://www.dallasconcretepros.net',
+  license: {
+    // [PLACEHOLDER] Add your Texas contractor/business license number here.
+    // Leave blank to show a "coming soon" placeholder instead of a fake number.
+    number: '',
+    issuingAuthority: 'Texas Department of Licensing and Regulation',
+  },
   sameAs: [
     // TODO: Add real profile URLs once created
     // 'https://www.google.com/maps/place/...',

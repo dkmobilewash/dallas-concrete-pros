@@ -5,7 +5,10 @@ import { services } from '@/data/services'
 import { cities } from '@/data/cities'
 import { site } from '@/data/site'
 import { buildMetadata } from '@/lib/metadata'
+import { isRedirectedServiceCityCombo } from '@/data/redirects'
+import { getComboContent } from '@/data/comboContent'
 import BreadcrumbNav from '@/components/ui/BreadcrumbNav'
+import FaqAccordion from '@/components/ui/FaqAccordion'
 import Button from '@/components/ui/Button'
 import ServiceSchema from '@/components/seo/ServiceSchema'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
@@ -14,6 +17,7 @@ export function generateStaticParams() {
   const params: { slug: string; city: string }[] = []
   for (const service of services) {
     for (const city of cities) {
+      if (isRedirectedServiceCityCombo(service.slug, city.slug)) continue
       params.push({ slug: service.slug, city: city.slug })
     }
   }
@@ -29,8 +33,11 @@ export function generateMetadata({
   const city = cities.find((c) => c.slug === params.city)
   if (!service || !city) return {}
 
+  const combo = getComboContent(service.slug, city.slug)
   const title = `${service.name} ${city.name} TX | ${site.name}`
-  const description = `Professional ${service.name.toLowerCase()} in ${city.name}, TX — quality concrete work for residential and commercial properties. Call ${site.phone} for a free estimate.`
+  const description =
+    combo?.metaDescription ??
+    `Professional ${service.name.toLowerCase()} in ${city.name}, TX — quality concrete work for residential and commercial properties. Call ${site.phone} for a free estimate.`
 
   return buildMetadata({
     title,
@@ -48,11 +55,16 @@ export default function ServiceCityPage({
   const city = cities.find((c) => c.slug === params.city)
   if (!service || !city) notFound()
 
+  const combo = getComboContent(service.slug, city.slug)
+
   const related = services
     .filter((s) => service.relatedSlugs.includes(s.slug))
     .slice(0, 3)
 
-  const nearbyCities = cities.filter((c) => c.slug !== city.slug).slice(0, 4)
+  const nearbyCities = cities
+    .filter((c) => c.slug !== city.slug)
+    .filter((c) => !isRedirectedServiceCityCombo(service.slug, c.slug))
+    .slice(0, 4)
 
   return (
     <>
@@ -90,74 +102,106 @@ export default function ServiceCityPage({
           <h2 className="text-2xl font-bold text-brand-charcoal mb-6">
             {service.name} Services in {city.name}
           </h2>
-          <p className="text-brand-gray mb-4 leading-relaxed">
-            Looking for a reliable {service.name.toLowerCase()} contractor in{' '}
-            {city.name}, TX? {site.name} provides expert{' '}
-            {service.name.toLowerCase()} services throughout {city.name} and the
-            surrounding {city.county} area. Our crews are experienced with the
-            local soil conditions, building codes, and weather patterns that
-            affect concrete work in this part of North Texas.
-          </p>
-          <p className="text-brand-gray mb-4 leading-relaxed">
-            {city.intro}
-          </p>
-          <p className="text-brand-gray mb-4 leading-relaxed">
-            Whether your project is near{' '}
-            {city.landmarks.slice(0, 2).join(' or ')} or in the{' '}
-            {city.neighborhoods.slice(0, 2).join(' or ')} area, our team
-            delivers quality {service.name.toLowerCase()} that stand up to years
-            of use. We handle every step from site preparation through final
-            cleanup, and we back our work with the attention to detail that{' '}
-            {city.name} property owners expect.
-          </p>
+          {combo ? (
+            combo.intro.map((p, i) => (
+              <p key={i} className="text-brand-gray mb-4 leading-relaxed">
+                {p}
+              </p>
+            ))
+          ) : (
+            <>
+              <p className="text-brand-gray mb-4 leading-relaxed">
+                Looking for a reliable {service.name.toLowerCase()} contractor in{' '}
+                {city.name}, TX? {site.name} provides expert{' '}
+                {service.name.toLowerCase()} services throughout {city.name} and
+                the surrounding {city.county} area. Our crews are experienced
+                with the local soil conditions, building codes, and weather
+                patterns that affect concrete work in this part of North Texas.
+              </p>
+              <p className="text-brand-gray mb-4 leading-relaxed">
+                {city.intro}
+              </p>
+              <p className="text-brand-gray mb-4 leading-relaxed">
+                Whether your project is near{' '}
+                {city.landmarks.slice(0, 2).join(' or ')} or in the{' '}
+                {city.neighborhoods.slice(0, 2).join(' or ')} area, our team
+                delivers quality {service.name.toLowerCase()} that stand up to
+                years of use. We handle every step from site preparation through
+                final cleanup, and we back our work with the attention to detail
+                that {city.name} property owners expect.
+              </p>
+            </>
+          )}
         </div>
       </section>
 
-      <section className="py-12 bg-brand-gray-light">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-brand-charcoal mb-6">
-            Why {city.name} Residents Choose {site.name}
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-6">
-            <div className="bg-white rounded-lg p-6">
-              <h3 className="font-semibold text-brand-charcoal mb-2">
-                Local Expertise
-              </h3>
-              <p className="text-brand-gray text-sm">
-                We understand the soil conditions and climate in {city.name} and{' '}
-                {city.county} that impact how concrete performs long-term.
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-6">
-              <h3 className="font-semibold text-brand-charcoal mb-2">
-                Quality Materials
-              </h3>
-              <p className="text-brand-gray text-sm">
-                Every pour uses the right concrete mix, reinforcement, and
-                finishing techniques for your specific project.
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-6">
-              <h3 className="font-semibold text-brand-charcoal mb-2">
-                Free Estimates
-              </h3>
-              <p className="text-brand-gray text-sm">
-                We provide detailed, no-obligation quotes for all{' '}
-                {service.name.toLowerCase()} projects in {city.name}.
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-6">
-              <h3 className="font-semibold text-brand-charcoal mb-2">
-                Licensed & Insured
-              </h3>
-              <p className="text-brand-gray text-sm">
-                Full insurance coverage and compliance with all {city.name}{' '}
-                building requirements and permit processes.
-              </p>
+      {combo?.localNotes && (
+        <section className="py-12 bg-brand-gray-light">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-2xl font-bold text-brand-charcoal mb-6">
+              {service.name} in {city.name}: What Sets Our Work Apart
+            </h2>
+            <div className="grid sm:grid-cols-3 gap-6">
+              {combo.localNotes.map((note) => (
+                <div key={note.title} className="bg-white rounded-lg p-6">
+                  <h3 className="font-semibold text-brand-charcoal mb-2">
+                    {note.title}
+                  </h3>
+                  <p className="text-brand-gray text-sm">{note.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {!combo && (
+        <section className="py-12 bg-brand-gray-light">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-2xl font-bold text-brand-charcoal mb-6">
+              Why {city.name} Residents Choose {site.name}
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div className="bg-white rounded-lg p-6">
+                <h3 className="font-semibold text-brand-charcoal mb-2">
+                  Local Expertise
+                </h3>
+                <p className="text-brand-gray text-sm">
+                  We understand the soil conditions and climate in {city.name}{' '}
+                  and {city.county} that impact how concrete performs long-term.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg p-6">
+                <h3 className="font-semibold text-brand-charcoal mb-2">
+                  Quality Materials
+                </h3>
+                <p className="text-brand-gray text-sm">
+                  Every pour uses the right concrete mix, reinforcement, and
+                  finishing techniques for your specific project.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg p-6">
+                <h3 className="font-semibold text-brand-charcoal mb-2">
+                  Free Estimates
+                </h3>
+                <p className="text-brand-gray text-sm">
+                  We provide detailed, no-obligation quotes for all{' '}
+                  {service.name.toLowerCase()} projects in {city.name}.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg p-6">
+                <h3 className="font-semibold text-brand-charcoal mb-2">
+                  Licensed & Insured
+                </h3>
+                <p className="text-brand-gray text-sm">
+                  Full insurance coverage and compliance with all {city.name}{' '}
+                  building requirements and permit processes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="py-12">
         <div className="max-w-4xl mx-auto px-4">
@@ -197,7 +241,11 @@ export default function ServiceCityPage({
             {related.map((r) => (
               <Link
                 key={r.slug}
-                href={`/services/${r.slug}/${city.slug}`}
+                href={
+                  isRedirectedServiceCityCombo(r.slug, city.slug)
+                    ? `/services/${r.slug}`
+                    : `/services/${r.slug}/${city.slug}`
+                }
                 className="block bg-white rounded-lg p-4 hover:shadow-md transition-shadow text-center"
               >
                 <span className="font-semibold text-brand-charcoal hover:text-brand-orange transition-colors">
@@ -227,6 +275,17 @@ export default function ServiceCityPage({
           </div>
         </div>
       </section>
+
+      {combo?.faqs && (
+        <section className="py-12 bg-brand-gray-light">
+          <div className="max-w-3xl mx-auto px-4">
+            <h2 className="text-2xl font-bold text-brand-charcoal mb-8">
+              {service.name} in {city.name}: Common Questions
+            </h2>
+            <FaqAccordion faqs={combo.faqs} />
+          </div>
+        </section>
+      )}
 
       <section className="py-16 bg-brand-charcoal text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">

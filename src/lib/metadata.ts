@@ -6,13 +6,18 @@ export function buildMetadata({
   title,
   description,
   canonical,
+  absoluteTitle,
 }: {
   title: string
   description: string
   canonical: string
+  // Bypasses the root layout's "%s | Dallas Concrete Pros" template so the
+  // rendered <title> is exactly `title` — needed when `title` is already
+  // budgeted to a hard character limit (e.g. a <=60-char SEO title).
+  absoluteTitle?: boolean
 }): Metadata {
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical },
     openGraph: {

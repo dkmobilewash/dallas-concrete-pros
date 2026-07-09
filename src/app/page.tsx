@@ -9,23 +9,24 @@ import CtaSection from '@/components/sections/CtaSection'
 import ProjectGallery from '@/components/sections/ProjectGallery'
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema'
 import { ogImage } from '@/data/images'
+import { site } from '@/data/site'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Dallas Concrete Contractors | Dallas Concrete Pros',
+    absolute: 'Concrete Contractors Dallas, TX | Dallas Concrete Pros',
   },
   description:
-    'Professional concrete contracting for driveways, patios, foundations, and more throughout Dallas and the surrounding areas. Call 214-466-2536 for a free estimate.',
-  alternates: { canonical: 'https://dallasconcretepros.net' },
+    'Top-rated concrete contractors in Dallas, TX for driveways, patios & foundations. Free estimates — call 214-466-2536.',
+  alternates: { canonical: site.baseUrl },
   openGraph: {
-    title: 'Dallas Concrete Contractors | Dallas Concrete Pros',
+    title: 'Concrete Contractors Dallas, TX | Dallas Concrete Pros',
     description:
-      'Professional concrete contracting for driveways, patios, foundations, and more throughout Dallas and the surrounding areas.',
-    url: 'https://dallasconcretepros.net',
+      'Top-rated concrete contractors in Dallas, TX for driveways, patios & foundations. Free estimates — call 214-466-2536.',
+    url: site.baseUrl,
     siteName: 'Dallas Concrete Pros',
     locale: 'en_US',
     type: 'website',
-    images: [{ url: `https://dallasconcretepros.net${ogImage}`, width: 1200, height: 630 }],
+    images: [{ url: `${site.baseUrl}${ogImage}`, width: 1200, height: 630 }],
   },
 }
 

@@ -5,6 +5,7 @@ import { cities } from '@/data/cities'
 import { services } from '@/data/services'
 import { site } from '@/data/site'
 import { buildMetadata } from '@/lib/metadata'
+import { isRedirectedServiceCityCombo } from '@/data/redirects'
 import BreadcrumbNav from '@/components/ui/BreadcrumbNav'
 import FaqAccordion from '@/components/ui/FaqAccordion'
 import Button from '@/components/ui/Button'
@@ -93,12 +94,16 @@ export default function CityPage({ params }: { params: { slug: string } }) {
             {services.map((s) => (
               <Link
                 key={s.slug}
-                href={`/services/${s.slug}`}
+                href={
+                  isRedirectedServiceCityCombo(s.slug, city.slug)
+                    ? `/services/${s.slug}`
+                    : `/services/${s.slug}/${city.slug}`
+                }
                 className="flex items-center gap-3 bg-white rounded-lg p-4 hover:shadow-md transition-shadow"
               >
                 <span className="w-2 h-2 bg-brand-orange rounded-full shrink-0" />
                 <span className="font-medium text-brand-charcoal hover:text-brand-orange transition-colors">
-                  {s.name}
+                  {s.name} in {city.name}
                 </span>
               </Link>
             ))}

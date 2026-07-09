@@ -5,6 +5,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import FloatingCta from '@/components/ui/FloatingCta'
 import { ogImage } from '@/data/images'
+import { site } from '@/data/site'
 
 export const metadata: Metadata = {
   title: {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   description:
     'Professional concrete contracting for driveways, patios, foundations, and more throughout Dallas and the surrounding areas.',
   openGraph: {
-    images: [{ url: `https://dallasconcretepros.net${ogImage}`, width: 1200, height: 630 }],
+    images: [{ url: `${site.baseUrl}${ogImage}`, width: 1200, height: 630 }],
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,

@@ -2,6 +2,7 @@ import { services } from '@/data/services'
 import { cities } from '@/data/cities'
 import { site } from '@/data/site'
 import { getAllPosts } from '@/lib/blog'
+import { isRedirectedServiceCityCombo } from '@/data/redirects'
 import type { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -22,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const comboUrls: MetadataRoute.Sitemap = []
   for (const service of services) {
     for (const city of cities) {
+      if (isRedirectedServiceCityCombo(service.slug, city.slug)) continue
       comboUrls.push({
         url: `${site.baseUrl}/services/${service.slug}/${city.slug}`,
         lastModified: new Date(),

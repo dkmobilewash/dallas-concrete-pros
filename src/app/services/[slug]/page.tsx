@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
 import {
   Car,
   Sofa,
@@ -21,6 +22,7 @@ import { cities } from '@/data/cities'
 import { site } from '@/data/site'
 import { buildMetadata } from '@/lib/metadata'
 import { getImagesByCategory } from '@/data/images'
+import { isRedirectedServiceCityCombo } from '@/data/redirects'
 import BreadcrumbNav from '@/components/ui/BreadcrumbNav'
 import FaqAccordion from '@/components/ui/FaqAccordion'
 import Button from '@/components/ui/Button'
@@ -43,18 +45,116 @@ const serviceImageCategory: Record<string, 'driveway' | 'patio' | 'walkway' | 'f
   'concrete-repair-resurfacing': 'driveway',
 }
 
+// Specific sub-services under each service — captures long-tail searches
+// (e.g. "concrete apron replacement Dallas") and shows the full scope of work.
+const serviceScope: Record<string, string[]> = {
+  'concrete-driveways': [
+    'New concrete driveway installation',
+    'Full driveway replacement',
+    'Driveway widening & extensions',
+    'Concrete apron & street transitions',
+    'Circular & side-entry driveways',
+    'Exposed aggregate & decorative finishes',
+    'Driveway removal & haul-off',
+  ],
+  'concrete-patios': [
+    'New concrete patio installation',
+    'Patio extensions & expansions',
+    'Multi-level patio construction',
+    'Stamped & colored patio finishes',
+    'Covered patio & pergola slabs',
+    'Outdoor kitchen & fire-pit pads',
+    'Patio drainage grading',
+  ],
+  'concrete-walkways': [
+    'Front entry walkways',
+    'Concrete sidewalks & public walks',
+    'ADA-compliant walkways & ramps',
+    'Garden & side-yard paths',
+    'Concrete steps & landings',
+    'Broom & decorative finishes',
+    'Walkway repair & replacement',
+  ],
+  'concrete-foundations': [
+    'Slab-on-grade foundations',
+    'Pier & beam foundations',
+    'Room addition foundations',
+    'Detached garage & shop slabs',
+    'Grade beams & footings',
+    'Foundation drainage & moisture prep',
+    'Engineered new-construction slabs',
+  ],
+  'retaining-walls': [
+    'Poured concrete retaining walls',
+    'Concrete block retaining walls',
+    'Tiered & terraced walls',
+    'Engineered structural walls',
+    'Garden & landscape walls',
+    'Wall drainage & weep systems',
+    'Erosion-control walls',
+  ],
+  'stamped-concrete': [
+    'Stamped concrete patios',
+    'Stamped driveways & walkways',
+    'Stamped pool decks',
+    'Decorative concrete overlays',
+    'Integral & surface color',
+    'Border & banding accents',
+    'Sealing & resealing',
+  ],
+  'commercial-concrete': [
+    'Commercial slabs & flatwork',
+    'Parking lots & drive lanes',
+    'ADA parking, ramps & sidewalks',
+    'Loading docks & approaches',
+    'Building pads & foundations',
+    'Curbs, gutters & wheel stops',
+    'Concrete repair & replacement',
+  ],
+  'concrete-flooring': [
+    'Epoxy & polyaspartic coatings',
+    'Polished concrete floors',
+    'Stained & dyed concrete',
+    'Garage floor coatings',
+    'Warehouse & industrial floors',
+    'Densifying & sealing',
+    'Moisture testing & mitigation',
+  ],
+  'concrete-pool-decks': [
+    'New pool deck construction',
+    'Pool deck resurfacing',
+    'Cool-deck spray textures',
+    'Stamped & decorative pool decks',
+    'Slip-resistant finishes',
+    'Coping integration',
+    'Deck expansion & repair',
+  ],
+  'concrete-repair-resurfacing': [
+    'Concrete crack repair',
+    'Spall & surface patching',
+    'Slab leveling (foam injection)',
+    'Concrete overlays & resurfacing',
+    'Driveway & patio restoration',
+    'Garage & commercial floor repair',
+    'Sealing & protective coatings',
+  ],
+}
+
 const serviceContent: Record<
   string,
   {
-    overview: string[]
+    overviewHeading?: string
+    overview: ReactNode[]
     benefits: { title: string; desc: string }[]
     process: { step: string; desc: string }[]
+    materials?: { title: string; desc: string }[]
+    pricingFactors?: { title: string; desc: string }[]
     faqs: { question: string; answer: string }[]
   }
 > = {
   'concrete-driveways': {
     overview: [
-      'A concrete driveway is one of the most important surfaces on your property. It handles the weight of your vehicles every day, endures the intense Dallas heat, and sets the first impression for anyone who visits your home. A properly poured driveway resists cracking, handles expansion and contraction through seasonal temperature swings, and maintains a clean appearance for years.',
+      'Looking for concrete driveway installation in Dallas, TX? A concrete driveway is one of the most important surfaces on your property. It handles the weight of your vehicles every day, endures the intense Dallas heat, and sets the first impression for anyone who visits your home. A properly poured driveway resists cracking, handles expansion and contraction through seasonal temperature swings, and maintains a clean appearance for years.',
       'At Dallas Concrete Pros, we install concrete driveways throughout Dallas and the surrounding cities with attention to subgrade preparation, proper thickness, reinforcement, and control joints. Whether you need a full driveway replacement or a new pour for a custom home, we deliver crack-resistant surfaces with smooth apron transitions and durable finishes.',
     ],
     benefits: [
@@ -196,9 +296,37 @@ const serviceContent: Record<
     ],
   },
   'concrete-flooring': {
+    overviewHeading: 'Concrete Flooring Services in Dallas, TX',
     overview: [
-      'Concrete flooring delivers a sleek, modern surface that stands up to heavy foot traffic, machinery, and chemical exposure. Whether you need a polished showroom floor, a coated garage slab, or a warehouse surface that can handle forklift traffic, concrete flooring is the most durable and low-maintenance option available.',
-      'Dallas Concrete Pros installs, polishes, and coats concrete floors for residential garages, commercial retail spaces, restaurants, warehouses, and industrial facilities throughout Dallas. We offer polished concrete, epoxy coatings, stained concrete, and densifier treatments that transform ordinary slabs into high-performance surfaces.',
+      'Searching for concrete flooring contractors who actually understand how a floor will be used? Dallas Concrete Pros installs, polishes, and coats concrete floors for garages, showrooms, restaurants, and warehouses throughout Dallas and the surrounding suburbs. As concrete floor experts, we handle everything from a single-car garage coating to a 20,000-square-foot warehouse floor, matching the right system to the traffic, chemicals, and appearance the space actually needs.',
+      <>
+        North Texas presents its own challenges for concrete flooring. The
+        expansive clay soils common throughout Dallas County can shift slabs
+        slightly over time, and existing floors sometimes need crack repair
+        or moisture mitigation before a new coating goes down — work we
+        handle directly, or through our{' '}
+        <Link href="/services/concrete-repair-resurfacing" className="text-brand-orange hover:underline">
+          concrete repair and resurfacing
+        </Link>{' '}
+        services if the slab needs more extensive attention. Dallas summers
+        also mean coatings have to cure and bond in triple-digit heat and
+        high humidity, which is why we choose formulations rated for those
+        conditions instead of a one-size-fits-all product.
+      </>,
+      <>
+        We see the same handful of projects again and again: home garage
+        floors in North Dallas and Preston Hollow that need an epoxy or
+        polyaspartic coating to resist tire tracking and hot asphalt
+        residue, retail and restaurant buildouts that want a polished or
+        stained look, and warehouse and light-industrial floors across the
+        DFW metroplex that need a durable, dust-free surface built for
+        forklift traffic — the kind of heavy-duty work we also cover under
+        our{' '}
+        <Link href="/services/commercial-concrete" className="text-brand-orange hover:underline">
+          commercial concrete
+        </Link>{' '}
+        services.
+      </>,
     ],
     benefits: [
       { title: 'Extreme Durability', desc: 'Concrete floors resist scratches, impacts, and heavy loads that would damage tile, wood, or vinyl.' },
@@ -209,14 +337,30 @@ const serviceContent: Record<
     process: [
       { step: 'Surface Assessment', desc: 'We evaluate your existing slab for cracks, moisture levels, and surface condition to determine the best treatment.' },
       { step: 'Grinding & Preparation', desc: 'Diamond grinders remove old coatings and open the concrete pores for proper adhesion of new finishes.' },
-      { step: 'Application', desc: 'Your chosen system — polish, epoxy, stain, or coating — is applied in layers with proper cure time between coats.' },
+      { step: 'Application', desc: 'Your chosen system — polish, epoxy, stain, or coating — is applied in layers with proper cure time between coats, timed around Dallas heat and humidity.' },
       { step: 'Final Seal', desc: 'A topcoat sealer is applied for additional protection, gloss control, and long-term performance.' },
+    ],
+    materials: [
+      { title: 'Epoxy Coatings', desc: 'Chemical- and oil-resistant coatings ideal for garages and industrial floors, with UV-stable topcoats available for areas that get direct sun through garage doors or bay openings.' },
+      { title: 'Polyaspartic Coatings', desc: 'Cure faster than epoxy and resist UV yellowing better — a strong fit for Dallas heat and humidity, where standard epoxy can amine-blush during application.' },
+      { title: 'Polished Concrete', desc: 'Diamond-ground to a satin or high-gloss sheen for retail, showroom, and warehouse floors that need a durable, low-maintenance surface with no coating to wear through.' },
+      { title: 'Stained & Dyed Concrete', desc: 'Acid stains and water-based dyes add rich, variegated color to garage floors and interior slabs without the thickness of a full coating system.' },
+      { title: 'Densifiers & Sealers', desc: 'Lithium-silicate densifiers harden and dust-proof warehouse floors, while penetrating sealers protect exposed or stained concrete from moisture and staining.' },
+    ],
+    pricingFactors: [
+      { title: 'Slab Condition', desc: 'Cracks, spalling, or old adhesive residue on an existing floor add prep time and cost before any coating or polish can go down.' },
+      { title: 'Moisture Testing', desc: 'Slabs poured over North Texas clay soil sometimes need a moisture vapor test — and a mitigating primer — before certain coatings will bond properly.' },
+      { title: 'Coating System', desc: 'Basic epoxy costs less than polyaspartic, metallic epoxy, or a fully polished floor with multiple grinding passes.' },
+      { title: 'Surface Preparation Method', desc: 'Diamond grinding, shot blasting, or acid etching are priced differently depending on the existing surface and the finish you want.' },
+      { title: 'Square Footage & Access', desc: 'Larger commercial floors typically cost less per square foot than small residential jobs, though tight access or off-hours scheduling can add cost.' },
     ],
     faqs: [
       { question: 'How long does it take to install a concrete floor coating?', answer: 'Most residential garage floors take 2–3 days including prep, application, and cure time. Commercial projects vary based on square footage.' },
       { question: 'Can you polish an existing concrete slab?', answer: 'Yes, most existing slabs can be polished. We grind the surface in progressive steps to achieve the level of sheen you want, from matte to high-gloss.' },
       { question: 'Is epoxy flooring slippery?', answer: 'Standard epoxy can be slippery when wet. We add anti-slip additives to the topcoat for garages, commercial kitchens, and other areas where traction matters.' },
       { question: 'How long do concrete floor coatings last?', answer: 'Quality epoxy and polyaspartic coatings last 10–20 years with normal use. Polished concrete is virtually permanent and only needs periodic re-densification.' },
+      { question: 'Do Dallas concrete floors need moisture testing before coating?', answer: 'Many do. Because North Texas clay soils can drive moisture up through a slab, we often run a moisture vapor test before installing epoxy or polyaspartic coatings, and use a moisture-mitigating primer if levels come back elevated. Skipping this step is one of the most common causes of coating failure.' },
+      { question: 'Why hire concrete floor experts instead of a general contractor?', answer: 'Concrete floor experts understand slab moisture, surface profile requirements, and how Dallas heat and humidity affect coating cure times — details that determine whether a floor lasts 15 years or peels within one summer. Our crews specialize in flooring specifically, not just general concrete work.' },
     ],
   },
   'concrete-pool-decks': {
@@ -304,6 +448,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title: service.metaTitle,
     description: service.metaDescription,
     canonical: `${site.baseUrl}/services/${service.slug}`,
+    absoluteTitle: service.slug === 'concrete-flooring',
   })
 }
 
@@ -314,9 +459,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   const content = serviceContent[service.slug]
   if (!content) notFound()
 
+  const scope = serviceScope[service.slug]
   const related = services.filter((s) => service.relatedSlugs.includes(s.slug))
   const Icon = iconMap[service.icon] ?? Building2
-  const topCities = cities.slice(0, 5)
   const category = serviceImageCategory[service.slug]
   const images = category ? getImagesByCategory(category) : []
   const heroImg = images[0]
@@ -362,13 +507,28 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <section className="py-12">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-2xl font-bold text-brand-charcoal mb-6">
-            What Are {service.name} in Dallas?
+            {content.overviewHeading ?? `What Are ${service.name} in Dallas?`}
           </h2>
           {content.overview.map((p, i) => (
             <p key={i} className="text-brand-gray mb-4 leading-relaxed">
               {p}
             </p>
           ))}
+          {scope && (
+            <div className="mt-8">
+              <h3 className="text-lg font-semibold text-brand-charcoal mb-4">
+                Our {service.name} Services Include:
+              </h3>
+              <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+                {scope.map((item) => (
+                  <li key={item} className="text-brand-gray flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-brand-orange shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </section>
 
@@ -412,6 +572,63 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
+      {content.materials && (
+        <section className="py-12 bg-brand-gray-light">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-2xl font-bold text-brand-charcoal mb-8">
+              {service.name} Materials & Finish Options
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-6">
+              {content.materials.map((m) => (
+                <div key={m.title} className="bg-white rounded-lg p-5">
+                  <h3 className="font-semibold text-brand-charcoal mb-1">{m.title}</h3>
+                  <p className="text-brand-gray text-sm">{m.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {content.pricingFactors && (
+        <section className="py-12">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-2xl font-bold text-brand-charcoal mb-4">
+              What Affects {service.name} Pricing in Dallas?
+            </h2>
+            <p className="text-brand-gray mb-8">
+              Every {service.name.toLowerCase()} project in Dallas is priced around a
+              few key factors:
+            </p>
+            <div className="space-y-5">
+              {content.pricingFactors.map((f) => (
+                <div key={f.title} className="flex gap-3">
+                  <CheckCircle className="w-5 h-5 text-brand-orange mt-1 shrink-0" />
+                  <div>
+                    <h3 className="font-semibold text-brand-charcoal">{f.title}</h3>
+                    <p className="text-brand-gray text-sm">{f.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {service.slug === 'concrete-flooring' && (
+              <p className="text-brand-gray text-sm mt-8">
+                We install concrete flooring for warehouses and home garages
+                throughout{' '}
+                <Link href="/services/concrete-flooring/dallas" className="text-brand-orange hover:underline">
+                  concrete flooring in Dallas
+                </Link>
+                , and for retail and office buildouts in the{' '}
+                <Link href="/services/concrete-flooring/plano" className="text-brand-orange hover:underline">
+                  Plano commercial corridor
+                </Link>
+                , plus the rest of the Dallas–Fort Worth metroplex.
+              </p>
+            )}
+          </div>
+        </section>
+      )}
+
       <section className="py-12 bg-brand-gray-light">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-2xl font-bold text-brand-charcoal mb-8">
@@ -443,11 +660,27 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       </section>
 
       <section className="py-12 bg-brand-gray-light">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-brand-gray text-lg">
-            We install {service.name.toLowerCase()} throughout{' '}
-            {topCities.map((c) => c.name).join(', ')}, and surrounding cities.
-          </p>
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-brand-charcoal mb-6">
+            Where We Install {service.name}
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {cities.map((c) => (
+              <Link
+                key={c.slug}
+                href={
+                  isRedirectedServiceCityCombo(service.slug, c.slug)
+                    ? `/services/${service.slug}`
+                    : `/services/${service.slug}/${c.slug}`
+                }
+                className="block bg-white rounded-lg p-4 hover:shadow-md transition-shadow text-center"
+              >
+                <span className="font-semibold text-brand-charcoal hover:text-brand-orange transition-colors">
+                  {service.name} in {c.name}
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -1,25 +1,16 @@
 import TestimonialCard from '@/components/ui/TestimonialCard'
+import { testimonials } from '@/data/testimonials'
 
-// TODO: Replace with verified Google/Yelp reviews before launch
-const testimonials = [
-  {
-    quote:
-      'They replaced our entire driveway in two days. The crew was professional, communicated clearly, and the finished product looks great.',
-    attribution: 'Homeowner in Dallas',
-  },
-  {
-    quote:
-      'We got quotes from several companies and went with Dallas Concrete Pros. Fair pricing, solid work, and they cleaned up everything when they were done.',
-    attribution: 'Homeowner in Frisco',
-  },
-  {
-    quote:
-      'Our new stamped patio turned out better than we expected. The team paid attention to every detail, from the grade to the color match.',
-    attribution: 'Homeowner in McKinney',
-  },
-]
+// Only show real testimonials — placeholder entries (quote starts with "[")
+// are hidden. When real ones are filled into src/data/testimonials.ts, this
+// section reappears automatically.
+const realTestimonials = testimonials.filter(
+  (t) => !t.quote.trim().startsWith('['),
+)
 
 export default function TestimonialsSection() {
+  if (realTestimonials.length === 0) return null
+
   return (
     <section className="py-16 md:py-20">
       <div className="max-w-6xl mx-auto px-4">
@@ -31,11 +22,13 @@ export default function TestimonialsSection() {
           worked with across the Dallas area.
         </p>
         <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
+          {realTestimonials.map((t, i) => (
             <TestimonialCard
               key={i}
               quote={t.quote}
-              attribution={t.attribution}
+              name={t.name}
+              city={t.city}
+              date={t.date}
             />
           ))}
         </div>

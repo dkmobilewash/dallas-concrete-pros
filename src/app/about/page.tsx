@@ -111,6 +111,11 @@ export default function AboutPage() {
               <p className="text-brand-gray text-sm">
                 Fully licensed with general liability coverage on every project.
               </p>
+              {site.license.number && (
+                <p className="text-brand-gray text-xs mt-2">
+                  License #{site.license.number}
+                </p>
+              )}
             </div>
             <div className="text-center">
               <Users className="w-10 h-10 text-brand-orange mx-auto mb-4" />

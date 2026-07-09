@@ -15,7 +15,7 @@ export const services: Service[] = [
     slug: 'concrete-driveways',
     name: 'Concrete Driveways',
     shortName: 'Driveways',
-    headline: 'Concrete Driveways in Dallas, TX',
+    headline: 'Concrete Driveway Installation in Dallas, TX',
     metaTitle: 'Concrete Driveway Installation Dallas TX',
     metaDescription:
       'Professional concrete driveway installation and replacement in Dallas, TX — call 214-466-2536 for a free estimate.',
@@ -106,10 +106,10 @@ export const services: Service[] = [
     slug: 'concrete-flooring',
     name: 'Concrete Flooring',
     shortName: 'Flooring',
-    headline: 'Concrete Flooring in Dallas, TX',
-    metaTitle: 'Concrete Flooring Contractors Dallas TX',
+    headline: 'Concrete Flooring Contractors in Dallas, TX',
+    metaTitle: 'Concrete Flooring Contractors in Dallas, TX | Free Estimate',
     metaDescription:
-      'Professional concrete flooring installation, polishing, and coating for homes and businesses in Dallas, TX — call 214-466-2536.',
+      'Concrete flooring contractors serving Dallas, TX — epoxy, polished & stained floors for homes and businesses. Call 214-466-2536.',
     heroSubhead:
       'Durable, low-maintenance concrete floors for garages, warehouses, retail spaces, and modern homes.',
     icon: 'Grid3x3',
